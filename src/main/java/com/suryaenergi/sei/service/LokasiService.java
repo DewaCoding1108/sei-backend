@@ -1,16 +1,16 @@
 package com.suryaenergi.sei.service;
 
-import com.suryaenergi.sei.dto.LokasiDto;
+import com.suryaenergi.sei.entity.Lokasi;
 
 import java.util.List;
 
 public interface LokasiService {
-    LokasiDto createLokasi(LokasiDto lokasiDto);
-    LokasiDto getLokasiById(Integer lokasiId);
+    Lokasi createLokasi(Lokasi lokasi);
+    Lokasi getLokasiById(Integer lokasiId);
 
-    List<LokasiDto> getAllLokasi();
+    List<Lokasi> getAllLokasi();
 
-    LokasiDto updateLokasi(Integer lokasiId, LokasiDto updatedLokasi);
+    Lokasi updateLokasi(Integer lokasiId, Lokasi updatedLokasi);
 
     void deleteLokasi(Integer lokasiId);
 }

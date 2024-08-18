@@ -1,6 +1,7 @@
 package com.suryaenergi.sei.entity;
 
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,4 +31,9 @@ public class Lokasi {
     private String kota;
     @Column(name = "created_at")
     private Timestamp createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 }

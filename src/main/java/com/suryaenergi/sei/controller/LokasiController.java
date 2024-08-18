@@ -1,12 +1,14 @@
 package com.suryaenergi.sei.controller;
 
-import com.suryaenergi.sei.dto.LokasiDto;
+import com.suryaenergi.sei.entity.Lokasi;
+import com.suryaenergi.sei.exception.ResourceNotFoundException;
 import com.suryaenergi.sei.service.LokasiService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,26 +18,28 @@ public class LokasiController {
 
     private LokasiService lokasiService;
 
-    @PostMapping
-    public ResponseEntity<LokasiDto> createLokasi(@RequestBody LokasiDto lokasiDto){
-        LokasiDto savedLokasi = lokasiService.createLokasi(lokasiDto);
-        return new ResponseEntity<>(savedLokasi, HttpStatus.CREATED);
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<LokasiDto> getLokasiById(@PathVariable("id") Integer lokasiId){
-        LokasiDto lokasiDto = lokasiService.getLokasiById(lokasiId);
-        return ResponseEntity.ok(lokasiDto);
-    }
     @GetMapping
-    public ResponseEntity<List<LokasiDto>> getAllLokasi(){
-        List<LokasiDto> lokasi = lokasiService.getAllLokasi();
+    public ResponseEntity<List<Lokasi>> getAllLokasi(){
+        return ResponseEntity.ok(lokasiService.getAllLokasi());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Lokasi> getLokasiById(@PathVariable("id") Integer lokasiId){
+        Lokasi lokasi = lokasiService.getLokasiById(lokasiId);
         return ResponseEntity.ok(lokasi);
     }
 
+    @PostMapping
+    public ResponseEntity<Lokasi> createLokasi(@RequestBody Lokasi lokasi){
+        Lokasi newLokasi = lokasiService.createLokasi(lokasi);
+        return ResponseEntity.ok(newLokasi);
+    }
+
+
+
     @PutMapping("{id}")
-    public ResponseEntity<LokasiDto> updatedLokasi(@PathVariable("id") Integer lokasiId, @RequestBody LokasiDto updatedLokasi){
-        LokasiDto lokasiDto = lokasiService.updateLokasi(lokasiId, updatedLokasi);
-        return ResponseEntity.ok(lokasiDto);
+    public ResponseEntity<Lokasi> updatedLokasi(@PathVariable("id") Integer lokasiId, @RequestBody Lokasi updatedLokasi){
+        return ResponseEntity.ok(lokasiService.updateLokasi(lokasiId, updatedLokasi));
     }
 
     @DeleteMapping("{id}")
